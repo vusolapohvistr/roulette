@@ -14,6 +14,7 @@ window.notLegacyRoulette = (() => {
         lastStageCubicBazier = lastStageCubicBazier || "cubic-bezier(.95,.93,.74,1.44)";
         slowDownCount = slowDownCount || 100;
         const roulette = document.getElementById(rouletteId);
+        roulette.style.setProperty('transform', 'translate3d(0, 0, 0)');
         roulette.style.setProperty('overflow', 'visible');
         const childrenCopy = roulette.cloneNode(true).children;
         const winner = childrenCopy.item(winnerPosition).cloneNode(true);
