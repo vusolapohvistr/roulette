@@ -20,11 +20,11 @@ window.notLegacyRoulette = (() => {
         slowDownCount = slowDownCount || 100;
         const browser = detect();
         const roulette = document.getElementById(rouletteId);
-        const winner = roulette.childNodes.item(winnerPosition).cloneNode(true);
+        const winner = roulette.children.item(winnerPosition).cloneNode(true);
         const elementWidth = roulette.children[0].offsetWidth;
 
         const replacementNodePos = ~~((window.innerWidth / elementWidth) / 2);
-        roulette.childNodes[replacementNodePos].replaceWith(winner.cloneNode(true));
+        roulette.children[replacementNodePos].replaceWith(winner.cloneNode(true));
 
         const minCopies = Math.round(window.innerWidth / roulette.offsetWidth);
         let winnerNodeIndex;
@@ -76,25 +76,25 @@ window.notLegacyRoulette = (() => {
             case 'firefox':
                 roulette.style.setProperty('overflow', 'visible');
                 if (parseInt(browser.version) < 70) {
-                    winnerNodeIndex = roulette.childNodes.length - ~~((window.innerWidth / roulette.firstChild.offsetWidth) / 2) - 2;
-                    roulette.childNodes[winnerNodeIndex].replaceWith(winner);
+                    winnerNodeIndex = roulette.children.length - ~~((window.innerWidth / roulette.firstElementChild.offsetWidth) / 2) - 2;
+                    roulette.children[winnerNodeIndex].replaceWith(winner);
                     break;
                 }
             default:
                 const additionalNodes = new DocumentFragment();
                 // add additional children to make roulette full width
                 for (let i = 0; i < minCopies; i++) {
-                    for (const node of roulette.childNodes) {
+                    for (const node of roulette.children) {
                         additionalNodes.appendChild(node.cloneNode(true));
                     }
                 }
-                const fullWidthElementCount = ~~(window.innerWidth / roulette.firstChild.offsetWidth) + 1;
+                const fullWidthElementCount = ~~(window.innerWidth / roulette.firstElementChild.offsetWidth) + 1;
                 for (let i = 0; i < fullWidthElementCount; i++) {
-                    additionalNodes.appendChild(roulette.childNodes[i].cloneNode(true));
+                    additionalNodes.appendChild(roulette.children[i].cloneNode(true));
                 }
                 roulette.appendChild(additionalNodes);
-                winnerNodeIndex = roulette.childNodes.length - ~~(fullWidthElementCount / 2) - 1;
-                roulette.childNodes[winnerNodeIndex].replaceWith(winner.cloneNode(true));
+                winnerNodeIndex = roulette.children.length - ~~(fullWidthElementCount / 2) - 1;
+                roulette.children[winnerNodeIndex].replaceWith(winner.cloneNode(true));
                 break;
         }
     }
@@ -119,7 +119,7 @@ window.notLegacyRoulette = (() => {
                              slowDownCount,
                              winnerNodeIndex,
                          }) {
-        const offset = ~~((winnerNodeIndex - ~~((window.innerWidth / roulette.firstChild.offsetWidth) / 2)) * roulette.firstChild.offsetWidth);
+        const offset = ~~((winnerNodeIndex - ~~((window.innerWidth / roulette.firstElementChild.offsetWidth) / 2)) * roulette.firstElementChild.offsetWidth);
         const keyframes = [
             {transform: 'translate3d(0, 0, 0)'},
             {transform: `translate3d(-${offset}px, 0, 0)`},
@@ -182,7 +182,7 @@ window.notLegacyRoulette = (() => {
         requestAnimationFrame(async () => {
             onStart && onStart();
 
-            const offset = ~~((winnerNodeIndex - ~~((window.innerWidth / roulette.firstChild.offsetWidth) / 2)) * roulette.firstChild.offsetWidth);
+            const offset = ~~((winnerNodeIndex - ~~((window.innerWidth / roulette.firstElementChild.offsetWidth) / 2)) * roulette.firstElementChild.offsetWidth);
             roulette.style.setProperty('transition', `transform 10s cubic-bezier(0.32, 0.64, 0.45, 1)`);
             roulette.style.setProperty('transform', `translate3d(-${offset}px, 0, 0)`);
             setTimeout(onFinish, 10500);
@@ -199,7 +199,7 @@ window.notLegacyRoulette = (() => {
                          criosLoopsCount,
                          winnerNodeIndex,
                      }) {
-        const offset = ~~((winnerNodeIndex - ~~((window.innerWidth / roulette.firstChild.offsetWidth) / 2)) * roulette.firstChild.offsetWidth);
+        const offset = ~~((winnerNodeIndex - ~~((window.innerWidth / roulette.firstElementChild.offsetWidth) / 2)) * roulette.firstElementChild.offsetWidth);
         const keyframes = [
             {transform: 'translate3d(0, 0, 0)'},
             {transform: `translate3d(-${offset}px, 0, 0)`},
