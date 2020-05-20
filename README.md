@@ -1,19 +1,18 @@
 **BUILD**
 
-`webpack` - builds project into dist folder
+`webpack` - builds project into rouletteV2 folder
 
 **EXAMPLE**
 
 
 ```
-notLegacyRoulette.playGame({
-    rouletteId: 'list',
-    winnerPosition: 3,
-    mainLoopsCount: 4,
-    slowDownLoopsCount: 2,
-    lastStageDuration: 3,
-    loopDuration: 1,
-    slowDownCounts: 100,
+ notLegacyRoulette.playGame({
+    rouletteId: 'wrapper',
+    winnerPosition: 25,
+    loopDuration: 3,
+    lastStageDuration: 4,
+    loopsCount: 1,
+    slowDownCoefficient: 0.5,
     onFinish: () => alert('the end'),
 });
 ```
