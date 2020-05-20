@@ -2,17 +2,25 @@ const path = require( 'path' );
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'rouletteV2.min.js'
+        path: path.resolve(__dirname, 'rouletteV2'),
+        filename: 'index.js'
     },
     optimization: {
         minimize: true,
         minimizer: [new TerserPlugin()],
     },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js' ],
+    },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
             {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,
