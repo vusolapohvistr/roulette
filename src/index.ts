@@ -154,7 +154,6 @@ window.notLegacyRoulette = (() => {
                     const targetPosition = window.innerWidth / 2;
                     const currentPosition = itemWidth * (winnerNodeIndex + 0.5);
                     const lastOffset = ~~(currentPosition - targetPosition);
-                    console.log(offset, lastOffset);
                     !finishedStart && setTimeout(() => {
                         roulette.style.setProperty('transform', `translate3d(-${lastOffset}px, 0px, 0px)`);
                         onFinish && setTimeout(onFinish, lastStageDuration * 1000 + 1);
