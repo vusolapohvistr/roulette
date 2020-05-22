@@ -126,9 +126,9 @@ window.notLegacyRoulette = (() => {
                       }: mainGameConfig) {
         if (roulette.firstElementChild) {
             const firstChild = roulette.firstElementChild as HTMLDivElement;
-            const offset =
-                ~~((winnerNodeIndex - ~~((window.innerWidth / firstChild.offsetWidth) / 2))
-                    * firstChild.offsetWidth);
+            const itemWidth = firstChild.offsetWidth;
+            const offset = ~~((winnerNodeIndex - ~~((window.innerWidth / itemWidth) / 2))
+                    * itemWidth);
             const keyframes = [
                 {transform: 'translate3d(0, 0, 0)'},
                 {transform: `translate3d(-${offset}px, 0, 0)`},
@@ -148,8 +148,17 @@ window.notLegacyRoulette = (() => {
                  ${cubicBezierRightPoint.x},
                  ${cubicBezierRightPoint.y})`;
                 console.log(cubic);
+                roulette.style.setProperty('transition', `all ${lastStageDuration}s ${cubic} 0s`);
+                roulette.style.setProperty('transform', `translate3d(0px, 0px, 0px)`);
                 mainAnimation.onfinish = () => {
-                    !finishedStart && requestAnimationFrame(async () => {
+                    const targetPosition = window.innerWidth / 2;
+                    const currentPosition = itemWidth * (winnerNodeIndex + 0.5);
+                    const lastOffset = ~~(currentPosition - targetPosition);
+                    console.log(offset, lastOffset);
+                    !finishedStart && setTimeout(() => {
+                        roulette.style.setProperty('transform', `translate3d(-${lastOffset}px, 0px, 0px)`);
+                        onFinish && setTimeout(onFinish, lastStageDuration * 1000 + 1);
+                        /*
                         let lastAnimationFinished = false;
                         const lastAnimation = roulette.animate(keyframes, {
                             duration: 1000 * lastStageDuration,
@@ -161,7 +170,9 @@ window.notLegacyRoulette = (() => {
                             !lastAnimationFinished && onFinish && setTimeout(onFinish, 100);
                             lastAnimationFinished = true;
                         };
-                    });
+
+                         */
+                    }, 0);
                     finishedStart = true;
                 }
             });
