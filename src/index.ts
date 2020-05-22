@@ -158,20 +158,6 @@ window.notLegacyRoulette = (() => {
                     !finishedStart && setTimeout(() => {
                         roulette.style.setProperty('transform', `translate3d(-${lastOffset}px, 0px, 0px)`);
                         onFinish && setTimeout(onFinish, lastStageDuration * 1000 + 1);
-                        /*
-                        let lastAnimationFinished = false;
-                        const lastAnimation = roulette.animate(keyframes, {
-                            duration: 1000 * lastStageDuration,
-                            easing: cubic,
-                            iterations: 1,
-                        });
-
-                        lastAnimation.onfinish = () => {
-                            !lastAnimationFinished && onFinish && setTimeout(onFinish, 100);
-                            lastAnimationFinished = true;
-                        };
-
-                         */
                     }, 0);
                     finishedStart = true;
                 }
