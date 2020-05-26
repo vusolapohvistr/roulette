@@ -151,7 +151,7 @@ window.notLegacyRoulette = (() => {
                 roulette.style.setProperty('transition', `all ${lastStageDuration}s ${cubic} 0s`);
                 roulette.style.setProperty('transform', `translate3d(0px, 0px, 0px)`);
 
-                const centre = Math.min(window.innerWidth / 2, document.documentElement.clientWidth / 2)
+                const centre = document.documentElement.clientWidth / 2;
 
                 const winnerPosition = (roulette.children[winnerNodeIndex] as HTMLDivElement).getBoundingClientRect();
                 const lastOffset = winnerPosition.left - centre + itemWidth / 2;
