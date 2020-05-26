@@ -150,10 +150,10 @@ window.notLegacyRoulette = (() => {
                 console.log(cubic);
                 roulette.style.setProperty('transition', `all ${lastStageDuration}s ${cubic} 0s`);
                 roulette.style.setProperty('transform', `translate3d(0px, 0px, 0px)`);
+
+                const winnerPosition = (roulette.children[winnerNodeIndex] as HTMLDivElement).getBoundingClientRect();
+                const lastOffset = winnerPosition.left - window.innerWidth / 2 + itemWidth / 2;
                 mainAnimation.onfinish = () => {
-                    const targetPosition = window.innerWidth / 2;
-                    const currentPosition = itemWidth * (winnerNodeIndex + 0.5);
-                    const lastOffset = ~~(currentPosition - targetPosition);
                     !finishedStart && setTimeout(() => {
                         roulette.style.setProperty('transform', `translate3d(-${lastOffset}px, 0px, 0px)`);
                         onFinish && setTimeout(onFinish, lastStageDuration * 1000 + 1);
